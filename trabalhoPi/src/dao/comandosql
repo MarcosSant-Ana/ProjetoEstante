@@ -1,0 +1,32 @@
+create database if not exists estanteVirtual;
+use estanteVirtual;
+create table if not exists  livros(
+ id int not null auto_increment,
+ titulo varchar(100) not null,
+ autor varchar(100) not null,
+ Primary Key(id)
+);
+
+CREATE TABLE if not exists  usuario (
+  nome VARCHAR(45) NOT NULL,
+  senha VARCHAR(45) NOT NULL,
+  PRIMARY KEY (nome),
+  UNIQUE INDEX nome_UNIQUE (nome ASC) VISIBLE
+  );
+  
+  CREATE TABLE IF NOT EXISTS livro_usuario(
+  idUsuario varchar(45),
+  idLivros int,
+  status BOOLEAN NOT NULL,
+  PRIMARY KEY (idUsuario,IdLivros),
+  FOREIGN KEY (idLivros) REFERENCES livros(id),
+  FOREIGN KEY(idUsuario) References usuario(nome)
+  );
+ 
+ CREATE TABLE IF NOT EXISTS livros_desejados(
+  idUsuario varchar(45),
+  idLivros int,
+  PRIMARY KEY (idUsuario,IdLivros),
+  FOREIGN KEY (idLivros) REFERENCES livros(id),
+  FOREIGN KEY(idUsuario) References usuario(nome)
+  );
